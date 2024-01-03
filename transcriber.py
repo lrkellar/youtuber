@@ -6,7 +6,10 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     
 client = OpenAI(api_key="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")
 
-audio_file = open(r"C:\Users\lance\Desktop\Programming\Youtuber\Chrome Shelled Regios  Ep 03.mp3", "rb")
+yama = r"C:\Users\lance\Desktop\Programming\Youtuber\1  Japanese Yakuza Documentary 5th Regime Yamaguchi Family.mp3"
+eng = r"C:\Users\lance\Desktop\Programming\Youtuber\Chrome Shelled Regios  Ep 03.mp3"
+
+audio_file = open(yama, "rb")
 transcript = client.audio.transcriptions.create(
   model="whisper-1", 
   file=audio_file, 
@@ -16,7 +19,7 @@ transcript = client.audio.transcriptions.create(
 print(transcript)
 
 def write_text_to_file(text, filename):
-    with open(f"{filename}.txt", "w") as f:
+    with open(f"{filename}.txt", "w", encoding="utf-8") as f:
         f.write(text)
 
-# write_text_to_file(transcript, "test1")
+write_text_to_file(transcript, "Yamaguchi")
