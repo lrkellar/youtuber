@@ -17,6 +17,8 @@ st.title("Youtube Saver")
 link = st.text_input("Link to Youtube Video", key="link")
 
 to_mp3 = st.sidebar.checkbox('to_mp3')
+to_script = st.sidebar.checkbox('to_script')
+
     
 
 if st.button("Download!"):
