@@ -11,16 +11,20 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 yama = r"C:\Users\lance\Desktop\Programming\Youtuber\1  Japanese Yakuza Documentary 5th Regime Yamaguchi Family.mp3"
 eng = r"C:\Users\lance\Desktop\Programming\Youtuber\Chrome Shelled Regios  Ep 03.mp3"
 latin = r"C:\Users\lance\Desktop\Programming\Youtuber\Le Chant des Templiers V Antiphona Media vita in morte sumus  Nunc dimittis.mp3"
-checkpoint = 3
+checkpoint = 1
 
+
+def transcribe(audio):
+  transcript = client.audio.transcriptions.create(
+    model="whisper-1", 
+    file=audio, 
+    response_format="text"
+  )
+  return transcript
 
 if checkpoint == 1:
   audio_file = open(latin, "rb")
-  transcript = client.audio.transcriptions.create(
-    model="whisper-1", 
-    file=audio_file, 
-    response_format="text"
-  )
+  transcript = transcribe(audio_file)
 
   print(transcript)
 

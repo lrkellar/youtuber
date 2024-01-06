@@ -11,6 +11,7 @@ import subprocess
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 import moviepy.editor as me
 import re
+import transcriber
 
 st.title("Youtube Saver")
 
@@ -37,3 +38,7 @@ if st.button("Download!"):
         if to_mp3:
             audio = me.AudioFileClip(filename)
             audio.write_audiofile(f"{temp_name}.mp3")
+        if to_script:
+            audio = me.AudioFileClip(filename)
+            transcript = transcriber.transcribe(audio)
+            st.text_area("Required Vocab", transcript, height=400)
