@@ -1,8 +1,14 @@
+.toml
+*.txt
+*.mp3
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 .streamlit
+
 
 
 *.3gpp
