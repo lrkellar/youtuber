@@ -6,7 +6,7 @@ import streamlit as st
 
 #OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     
-client = OpenAI(api_key=st.secrets[OPENAI_API_KEY])
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 yama = r"C:\Users\lance\Desktop\Programming\Youtuber\1  Japanese Yakuza Documentary 5th Regime Yamaguchi Family.mp3"
 eng = r"C:\Users\lance\Desktop\Programming\Youtuber\Chrome Shelled Regios  Ep 03.mp3"
