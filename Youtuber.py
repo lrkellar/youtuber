@@ -12,6 +12,8 @@ from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 import moviepy.editor as me
 import re
 import transcriber
+import collections
+
 
 st.title("Youtube Saver")
 
@@ -40,5 +42,30 @@ if st.button("Download!"):
             audio.write_audiofile(f"{temp_name}.mp3")
         if to_script:
             audio = me.AudioFileClip(filename)
-            transcript = transcriber.transcribe(audio)
-            st.text_area("Required Vocab", transcript, height=400)
+            audio_file = open(filename, "rb")
+            transcript = transcriber.transcribe(audio_file)
+            wordcount = transcriber.vocab_with_cli(transcript)
+            # Sort the wordcount items by the third element (float value) in decreasing order
+            sorted_wordcount = sorted(list(wordcount.items()), key=lambda x: x[2], reverse=True)
+
+
+            col1, col2 = st.columns(2)
+
+            # Calculate column height based on screen height
+            screen_height = 600
+            column_height = screen_height // 2
+
+            with col1:
+                st.text_area(
+                    "",
+                    "\n".join([f"{word}: {count}" for word, count in list(wordcount.items())[:len(wordcount)//2]]),
+                    height=column_height,
+                )
+
+            with col2: 
+                st.text_area(
+                    "",
+                    "\n".join([f"{word}: {count}" for word, count in list(wordcount.items())[len(wordcount)//2:]]),
+                    height=column_height,
+                )
+            st.text_area("Transcript", transcript, height=400)
